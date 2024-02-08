@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $info = DB::table('infos')->get();
+
+    return view('index', ['info' => $info]);
 });
+Route::post('/', [UserController::class, 'sendToDB']);
